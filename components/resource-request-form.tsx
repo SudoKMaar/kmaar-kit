@@ -102,8 +102,11 @@ export function ResourceRequestForm({
         toast.error("An error occurred");
       }
     } catch (error) {
-      toast.error("An error occurred");
-      console.error(error);
+      if (error instanceof Error) {
+        toast.error(`An error occurred: ${error.message}`);
+      } else {
+        toast.error("An error occurred");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -180,7 +183,7 @@ export function ResourceRequestForm({
               render={({ field }) => (
                 <FormItem>
                   <div>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>Primary Category</FormLabel>
                   </div>
                   <Select
                     onValueChange={field.onChange}

@@ -14,7 +14,7 @@ export default async function Navbar() {
 
   return (
     <nav className="fixed z-50 flex items-center justify-center w-full p-3 select-none bg-gradient-to-b from-background via-background/50 to-background/0 backdrop-blur-lg backdrop-brightness-90">
-      <div className="flex items-center justify-between w-full px-2 max-w-screen-2xl">
+      <div className="flex items-center justify-between w-full max-w-screen-2xl">
         <div className="select-none">
           <Link
             href={"/"}

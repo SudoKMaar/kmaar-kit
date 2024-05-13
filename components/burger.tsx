@@ -23,6 +23,7 @@ export function BurgerMenu({ categories }: BurgerMenuProps) {
         <Button
           size="icon"
           className="w-8 h-8 p-0 border bg-background/50 border-border/75"
+          aria-label="Open Menu"
         >
           <Menu className="w-5 h-5" />
         </Button>

@@ -24,11 +24,11 @@ export default function AddResource({ categories }: AddResourceProps) {
       <DialogTrigger asChild>
         <Button
           id="add-resource"
-          aria-hidden
+          aria-label="Contribute Resource"
           variant="default"
           className="flex items-center h-12 gap-2 my-auto rounded-xl"
         >
-          <PlusCircle /> Add Resource
+          <PlusCircle /> Contribute Resource
         </Button>
       </DialogTrigger>
       <DialogContent className="w-full max-w-md mx-auto overflow-scroll text-white bg-black rounded-none shadow-input md:rounded-xl">
