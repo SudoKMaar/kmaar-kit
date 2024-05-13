@@ -1,8 +1,22 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Rubik } from "next/font/google";
+import { Chivo } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/navbar";
+import { Sidebar } from "@/components/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+const rubik = Rubik({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-rubik",
+});
+const chivo = Chivo({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-chivo",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
@@ -27,8 +41,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="scroll-smooth bg-background">
+      <body className={rubik.variable + " " + chivo.variable}>
+        <Navbar />
+        <main className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-screen-2xl">
+          <Sidebar />
+          <div
+            id="mainContent"
+            className="flex flex-col justify-between w-full max-w-screen-xl py-8 pt-20 mx-auto overflow-auto"
+          >
+            <Suspense>{children}</Suspense>
+            {/* <Footer /> */}
+          </div>
+        </main>
+        <Toaster richColors />
+      </body>
     </html>
   );
 }

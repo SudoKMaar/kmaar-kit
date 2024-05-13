@@ -13,6 +13,16 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "text",
@@ -23,14 +33,9 @@ export default defineType({
       name: "category",
       title: "Category",
       type: "array",
-      description: "Choose two categegories",
-      validation: (rule) =>
-        rule
-          .required()
-          .min(1)
-          .max(2)
-          .error("You must select between 1 and 2 categories."),
-      of: [{ type: "string" }],
+      of: [{ type: "reference", to: { type: "category" } }],
+      description: "Choose relevant categegories",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "url",
