@@ -44,8 +44,8 @@ export default function AddResource({ categories }: AddResourceProps) {
             </DialogDescription>
           </h3>
         </DialogHeader>
-        <Separator className="mb-[1px]" />
-        <ResourceRequestForm className="px-4" categories={categories} />
+        <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent my-1 h-[1px] w-full" />
+        <ResourceRequestForm className="px-0" categories={categories} />
         <DialogFooter className="pt-0 md:hidden">
           <DialogClose asChild>
             <Button className="bg-gradient-to-br relative group/btn from-background to-background block bg-background w-full text-white h-10 font-medium shadow-[0px_1px_0px_0px_var(--background)_inset,0px_-1px_0px_0px_var(--background)_inset] rounded-xl">

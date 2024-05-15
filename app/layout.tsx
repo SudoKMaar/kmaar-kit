@@ -1,9 +1,9 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import { Chivo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import { Sidebar } from "@/components/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -44,16 +44,16 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth bg-background">
       <body className={rubik.variable + " " + chivo.variable}>
         <Navbar />
-        <main className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-screen-2xl">
+        <section className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-screen-2xl">
           <Sidebar />
-          <div
+          <main
             id="mainContent"
             className="flex flex-col justify-between w-full max-w-screen-xl py-8 pt-20 mx-auto overflow-auto"
           >
-            <Suspense>{children}</Suspense>
-            {/* <Footer /> */}
-          </div>
-        </main>
+            {children}
+            <Footer />
+          </main>
+        </section>
         <Toaster richColors />
       </body>
     </html>

@@ -13,7 +13,7 @@ export const Sidebar = async () => {
   });
 
   return (
-    <div className="flex-col hidden w-full max-w-[250px] pt-20 lg:flex ">
+    <aside className="flex-col hidden w-full max-w-[250px] pt-20 lg:flex ">
       <div className="items-center justify-center w-[250px] h-12 mb-4">
         <SidebarSearch categories={categories} />
       </div>
@@ -42,6 +42,6 @@ export const Sidebar = async () => {
           </Button>
         ))}
       </div>
-    </div>
+    </aside>
   );
 };

@@ -10,6 +10,16 @@ interface ResourceSubmissionEmailProps {
   resourcePricing: string;
 }
 
+interface FeedbackSubmissionEmailProps {
+  name: string;
+  email: string;
+  feedbackType: string;
+  subject: string;
+  description: string;
+  rating: string;
+  screenshots: string;
+}
+
 export const ResourceSubmissionEmail: React.FC<
   Readonly<ResourceSubmissionEmailProps>
 > = ({
@@ -56,4 +66,51 @@ export const ResourceSubmissionEmail: React.FC<
   </div>
 );
 
-export default ResourceSubmissionEmail;
+export const FeedbackSubmissionEmail: React.FC<
+  Readonly<FeedbackSubmissionEmailProps>
+> = ({
+  name,
+  email,
+  feedbackType,
+  subject,
+  description,
+  rating,
+  screenshots,
+}) => (
+  <div>
+    <h1>Hello, {name}!</h1>
+    <p>
+      Thank you for your submission to the KMaar Kit. Here are the details of
+      your feedback:
+    </p>
+    <ul>
+      <li>
+        <strong>Name:</strong> {name}
+      </li>
+      <li>
+        <strong>Email:</strong> {email}
+      </li>
+      <li>
+        <strong>Feedback Type:</strong> {feedbackType}
+      </li>
+      <li>
+        <strong>Subject:</strong> {subject}
+      </li>
+      <li>
+        <strong>Description:</strong> {description}
+      </li>
+      <li>
+        <strong>Rating:</strong> {rating}
+      </li>
+      <li>
+        <strong>Screenshots URL:</strong> {screenshots}
+      </li>
+    </ul>
+    <p>Thank you for your attention to this matter.</p>
+    <p>
+      Best Regards,
+      <br />
+      The KMaar Kit Team
+    </p>
+  </div>
+);

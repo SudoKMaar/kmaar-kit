@@ -13,7 +13,8 @@ export function SidebarSearch({ categories }: SidebarSearchProps) {
   const router = useRouter();
   const [search, setSearch] = useState<string>("");
 
-  const placeholders = categories.map((category) => category.name);
+  const placeholdersArray = categories.map((category) => category.name);
+  const placeholders = placeholdersArray.sort(() => Math.random() - 0.5);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
