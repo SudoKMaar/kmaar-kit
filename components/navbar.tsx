@@ -22,9 +22,9 @@ export default async function Navbar() {
           >
             <Image
               alt="KMaar Kit"
-              width={157.53}
-              height={46.769}
-              src="/kmaar-kit.svg"
+              width={163}
+              height={48}
+              src="/kmaar-kit.png"
             />
           </Link>
         </div>

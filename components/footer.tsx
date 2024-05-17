@@ -61,9 +61,9 @@ export default function Footer() {
             >
               <Image
                 alt="KMaar Kit"
-                width={157.53}
-                height={46.769}
-                src="/kmaar-kit.svg"
+                width={163}
+                height={48}
+                src="/kmaar-kit.png"
               />
             </Link>
           </div>
@@ -77,7 +77,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               href="https://kmaar.vercel.app/"
             >
-              <span className="font-bold tracking-wider hover:underline hover:underline-offset-2">
+              <span className="font-bold tracking-wider hover:underline hover:underline-offset-2 text-gradient">
                 Abhishek Kumar
               </span>
             </Link>
@@ -92,13 +92,13 @@ export default function Footer() {
               rel="noopener noreferrer"
               href="https://kmstudio.vercel.app/"
             >
-              <span className="font-bold tracking-wider hover:underline hover:underline-offset-2">
+              <span className="font-bold tracking-wider hover:underline hover:underline-offset-2 text-gradient">
                 KMaar Miscellaneous Studio
               </span>
             </Link>
           </div>
         </div>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 md:gap-y-3 gap-y-0 md:pt-2 xl:pt-4">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 md:gap-y-3 gap-y-0 md:pt-2 xl:pt-4 text-gradient">
           {links.map((link) => (
             <li key={link.id} className="flex text-base w-fit group">
               {link.id === 2 ? (
@@ -106,8 +106,8 @@ export default function Footer() {
                   <Button variant="link" className="p-0 text-base">
                     {link.label}
                     <span className="relative overflow-hidden h-fit w-fit">
-                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full " />
-                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1]" />
+                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full text-gradient" />
+                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1] text-gradient" />
                     </span>
                   </Button>
                 </FeedbackFormButton>
@@ -121,8 +121,8 @@ export default function Footer() {
                   <Button variant="link" className="p-0 text-base">
                     {link.label}
                     <span className="relative overflow-hidden h-fit w-fit">
-                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full " />
-                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1]" />
+                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 text-gradient transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full " />
+                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 text-gradient group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1]" />
                     </span>
                   </Button>
                 </Link>
@@ -131,8 +131,8 @@ export default function Footer() {
                   <Button variant="link" className="p-0 text-base">
                     {link.label}
                     <span className="relative overflow-hidden h-fit w-fit">
-                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full " />
-                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1]" />
+                      <MoveUpRight className="group-hover:-translate-y-5 text-gradient group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full " />
+                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 text-gradient group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1]" />
                     </span>
                   </Button>
                 </Link>
