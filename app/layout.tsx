@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Sidebar } from "@/components/sidebar";
 import { Toaster } from "@/components/ui/sonner";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
           </main>
         </section>
         <Toaster richColors />
+        <ScrollToTop />
       </body>
     </html>
   );
