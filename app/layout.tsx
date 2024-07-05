@@ -45,18 +45,18 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth bg-background">
       <body className={rubik.variable + " " + chivo.variable}>
         <Navbar />
-        <section className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-screen-2xl">
+        <section className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-[1786px]">
           <Sidebar />
           <main
             id="mainContent"
-            className="flex flex-col justify-between w-full max-w-screen-xl py-8 pt-20 mx-auto overflow-auto"
+            className="flex flex-col justify-between w-full max-w-screen-2xl py-8 pt-20 mx-auto overflow-auto"
           >
             {children}
             <Footer />
           </main>
+          <ScrollToTop />
         </section>
         <Toaster richColors />
-        <ScrollToTop />
       </body>
     </html>
   );

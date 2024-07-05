@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import TextShimmer from "@/components/ui/animated-shiny-text";
 import { cn } from "@/lib/utils";
+import TextShimmer from "@/components/ui/animated-shiny-text";
+import { Resource } from "@/components/resource";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="items-center justify-between w-full mx-auto">
       <div className="h-fit w-full bg-background bg-grid-white/[0.08] relative flex items-center justify-center">
@@ -35,7 +36,7 @@ export default function Home() {
           </p>
         </section>
       </div>
-      <div className="w-full h-screen">a</div>
+      <Resource />
     </main>
   );
 }
