@@ -1,53 +1,57 @@
+import { Metadata } from "next";
 import { Suspense } from "react";
 import { groq } from "next-sanity";
 import { ArrowRight } from "lucide-react";
-import { redirect } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { client, sanityFetch } from "@/sanity/lib/client";
-import ResourceCard from "@/components/resource-card";
+import { sanityFetch } from "@/sanity/lib/client";
 import { ResourceCardType } from "@/sanity/lib/types";
+import ResourceCard from "@/components/resource-card";
 import TextShimmer from "@/components/ui/animated-shiny-text";
-import PaginationSection from "@/components/resource-pagination-section";
 import ResourceCardSkeleton from "@/components/resource-card-skeleton";
+import PaginationSection from "@/components/resource-pagination-section";
 import NumberTicker from "@/components/ui/number-ticker";
 
-export default async function Home({
+export const metadata: Metadata = {
+  title: { absolute: "Search KMaar Kit: Boost Your Productivity" },
+  description:
+    "Unlock a world of creativity and productivity with our comprehensive collection of tools, assets, and guides tailored for developers and designers alike. Search for resource search for KMaar Kit",
+};
+
+export default async function Search({
   searchParams,
 }: {
   searchParams?: {
     page: string;
+    q: string;
   };
 }) {
-  const getTotalResourcesQuery = groq`count(*[_type == 'resource'])`;
-  const pageNum = Number(searchParams?.page ?? 1);
-  // console.log("pagenumber: " + pageNum);
-  const totalResources: number = await sanityFetch({
-    query: getTotalResourcesQuery,
-    tags: ["resource"],
-  });
-  const maxPage: number = Math.ceil(totalResources / 12);
-  // console.log("POSTnumber (rounded up): " + postsNum);
-  const pageSize = 12;
-  const getAscendingResourcesQuery = groq`*[_type == "resource"] | order(name asc) [${
-    (pageNum - 1) * pageSize
-  }...${pageNum * pageSize}] {
-    _id,
-    _createdAt,
-    name,
-    "slug": slug.current,
-    description,
-    "category": category[]->{name},
-    url,
-    pricing,
-    keywords,
-    image {
-      "image": asset->url,
-      alt,
-    }}`;
+  const q = searchParams?.q ?? "";
+  const searchQuery = groq`*[_type == "resource" && keywords match "*${q}*"] | order(name asc){
+            _id,
+            _createdAt,
+            name,
+            "slug": slug.current,
+            description,
+            "category": category[]->{name},
+            url,
+            pricing,
+            keywords,
+            image {
+            "image": asset->url,
+            alt,
+            }
+        }`;
   const resources: ResourceCardType[] = await sanityFetch({
-    query: getAscendingResourcesQuery,
+    query: searchQuery,
     tags: ["resource"],
   });
+  const getTotalResult = `count(*[_type == "resource" && keywords match "*${q}*"])`;
+  const totalResult: number = await sanityFetch({
+    query: getTotalResult,
+    tags: ["resource"],
+  });
+  const pageNum = Number(searchParams?.page ?? 1);
+  const maxPage = Math.ceil(totalResult / 12);
   return (
     <main className="items-center justify-between w-full mx-auto">
       <div className="h-fit w-full bg-background bg-grid-white/[0.08] relative flex items-center justify-center">
@@ -83,35 +87,34 @@ export default async function Home({
       <section>
         <div className="py-4 mx-4">
           <h2 className="text-3xl text-white font-bold">
-            Explore{" "}
-            <span className="text-gradient">
-              {" "}
-              <NumberTicker value={totalResources} /> Resources{" "}
-            </span>
+            <NumberTicker value={totalResult} /> Search Result For{" "}
+            <span className="text-gradient">{q}</span>
           </h2>
         </div>
         <section className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 mx-4">
           <Suspense
-            key={searchParams?.page || ""}
+            key={searchParams?.q || ""}
             fallback={<ResourceCardSkeleton />}
           >
-            {resources.length > 0
-              ? resources.map((resource) => (
-                  <ResourceCard
-                    key={resource.slug}
-                    name={resource.name}
-                    slug={resource.slug}
-                    description={resource.description}
-                    category={resource.category}
-                    url={resource.url}
-                    pricing={resource.pricing}
-                    image={resource.image}
-                  />
-                ))
-              : redirect("/")}
+            {resources.length > 0 ? (
+              resources.map((resource) => (
+                <ResourceCard
+                  key={resource.slug}
+                  name={resource.name}
+                  slug={resource.slug}
+                  description={resource.description}
+                  category={resource.category}
+                  url={resource.url}
+                  pricing={resource.pricing}
+                  image={resource.image}
+                />
+              ))
+            ) : (
+              <p className="text-white">No result found</p>
+            )}
           </Suspense>
         </section>
-        <PaginationSection maxPage={maxPage} />
+        <PaginationSection maxPage={1} />
       </section>
     </main>
   );

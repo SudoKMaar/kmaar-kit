@@ -46,6 +46,7 @@ export const ScrollToTop = () => {
           className={`bg-primary/50 rounded-full bottom-2 fixed right-3 z-50 opacity-90 hover:opacity-100 transition-opacity duration-300 ${
             !visibleToTop && "opacity-0 pointer-events-none "
           }`}
+          aria-label="Scroll to top"
         >
           <ArrowUp className="h-8 w-8" />
         </Button>

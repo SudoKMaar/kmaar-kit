@@ -25,7 +25,7 @@ const links: Link[] = [
   {
     id: 3,
     href: "https://github.com/SudoKMaar/kmaar-kit",
-    label: "Contribute on Github",
+    label: "Contribute on GitHub",
   },
   {
     id: 4,
