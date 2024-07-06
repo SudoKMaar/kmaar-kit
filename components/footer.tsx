@@ -72,7 +72,7 @@ export default function Footer() {
               &copy; {new Date().getFullYear()}
             </span>
             <Link
-              className="relative w-full overflow-y-hidden group h-fit"
+              className="relative w-full overflow-y-hidden hover:underline hover:underline-offset-2 decoration-[#0093b4] group h-fit"
               target="_blank"
               rel="noopener noreferrer"
               href="https://kmaar.vercel.app/"
@@ -87,7 +87,7 @@ export default function Footer() {
               All rights reserved | Powered by
             </div>
             <Link
-              className="relative w-full overflow-y-hidden group h-fit"
+              className="relative w-full overflow-y-hidden hover:underline hover:underline-offset-2 decoration-[#0093b4] group h-fit"
               target="_blank"
               rel="noopener noreferrer"
               href="https://kmstudio.vercel.app/"
@@ -106,8 +106,8 @@ export default function Footer() {
                   <Button variant="link" className="p-0 text-base">
                     {link.label}
                     <span className="relative overflow-hidden h-fit w-fit">
-                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full text-gradient" />
-                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1] text-gradient" />
+                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-[#0093b4] stroke-[1] w-[75%] h-[75%]" />
+                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-[#00b8e2] stroke-[1] w-[80%] h-[80%]" />
                     </span>
                   </Button>
                 </FeedbackFormButton>
@@ -121,8 +121,8 @@ export default function Footer() {
                   <Button variant="link" className="p-0 text-base">
                     {link.label}
                     <span className="relative overflow-hidden h-fit w-fit">
-                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 text-gradient transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full " />
-                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 text-gradient group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1]" />
+                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-[#0093b4] stroke-[1] w-[75%] h-[75%]" />
+                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-[#00b8e2] stroke-[1] w-[80%] h-[80%]" />
                     </span>
                   </Button>
                 </Link>
@@ -131,8 +131,8 @@ export default function Footer() {
                   <Button variant="link" className="p-0 text-base">
                     {link.label}
                     <span className="relative overflow-hidden h-fit w-fit">
-                      <MoveUpRight className="group-hover:-translate-y-5 text-gradient group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-light-gray stroke-[1] w-full h-full " />
-                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 text-gradient group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-light-gray stroke-[1]" />
+                      <MoveUpRight className="group-hover:-translate-y-5 group-hover:translate-x-5 duration-500 transition-transform ease-in-out-circ fill-[#0093b4] stroke-[1] w-[75%] h-[75%]" />
+                      <MoveUpRight className="absolute top-0 group-hover:translate-x-0 duration-500 group-hover:translate-y-0 transition-all ease-in-out-circ translate-y-5 -translate-x-5 fill-[#00b8e2] stroke-[1] w-[80%] h-[80%]" />
                     </span>
                   </Button>
                 </Link>

@@ -22,7 +22,7 @@ const ResourceCard = ({
 }: ResourceCardType) => {
   return (
     <>
-      <Card key={slug} className="max-w-md max-h-[30rem] rounded-lg">
+      <Card key={slug} className="max-w-md max-h-[30rem] rounded-xl">
         <CardHeader className="space-y-2 p-4 justify-between h-full">
           <div className="space-y-4">
             <CardTitle className="grid auto-cols-min grid-cols-1 grid-flow-col justify-between items-center">
@@ -37,14 +37,14 @@ const ResourceCard = ({
             </CardTitle>
             <div>
               <Link href={url} target="_blank" className="">
-                <div className="w-full relative aspect-video bg-muted rounded-lg hover:opacity-90 transition-opacity">
+                <div className="w-full relative aspect-video rounded-xl hover:opacity-90 transition-opacity">
                   <Image
                     placeholder="empty"
                     src={image.image}
                     alt={image.alt}
                     fill
                     sizes="100% 100%"
-                    className="rounded-lg object-cover"
+                    className="rounded-xl object-cover"
                   />
                 </div>
               </Link>

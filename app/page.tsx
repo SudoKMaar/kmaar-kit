@@ -1,10 +1,55 @@
-import Image from "next/image";
+import { Suspense } from "react";
+import { groq } from "next-sanity";
 import { ArrowRight } from "lucide-react";
+import { redirect } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { client } from "@/sanity/lib/client";
+import ResourceCard from "@/components/resource-card";
+import { ResourceCardType } from "@/sanity/lib/types";
 import TextShimmer from "@/components/ui/animated-shiny-text";
-import { Resource } from "@/components/resource";
+import PaginationSection from "@/components/resource-pagination-section";
+import ResourceCardSkeleton from "@/components/resource-card-skeleton";
 
-export default async function Home() {
+const getTotalResources = async () => {
+  const query = groq`count(*[_type == 'resource'])`;
+  return client.fetch(query);
+};
+
+const getAscendingResouces = async (lastPageNum: number) => {
+  const pageSize = 12;
+  const query = groq`*[_type == "resource"] | order(name asc) [${
+    (lastPageNum - 1) * pageSize
+  }...${lastPageNum * pageSize}] {
+    _id,
+    _createdAt,
+    name,
+    "slug": slug.current,
+    description,
+    "category": category[]->{name},
+    url,
+    pricing,
+    keywords,
+    image {
+      "image": asset->url,
+      alt,
+    }}`;
+  console.log(query);
+  return client.fetch(query, { lastId: lastPageNum });
+};
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    page: string;
+  };
+}) {
+  const pageNum = Number(searchParams?.page ?? 1);
+  // console.log("pagenumber: " + pageNum);
+  const totalResources = await getTotalResources();
+  const maxPage = Math.ceil(totalResources / 12);
+  // console.log("POSTnumber (rounded up): " + postsNum);
+  const resources: ResourceCardType[] = await getAscendingResouces(pageNum);
   return (
     <main className="items-center justify-between w-full mx-auto">
       <div className="h-fit w-full bg-background bg-grid-white/[0.08] relative flex items-center justify-center">
@@ -36,7 +81,36 @@ export default async function Home() {
           </p>
         </section>
       </div>
-      <Resource />
+
+      <section>
+        <div className="py-4 mx-4">
+          <h2 className="text-3xl text-white font-bold">
+            Explore <span className="text-gradient">Resources</span>
+          </h2>
+        </div>
+        <section className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 mx-4">
+          <Suspense
+            key={searchParams?.page || ""}
+            fallback={<ResourceCardSkeleton />}
+          >
+            {resources.length > 0
+              ? resources.map((resource) => (
+                  <ResourceCard
+                    key={resource.slug}
+                    name={resource.name}
+                    slug={resource.slug}
+                    description={resource.description}
+                    category={resource.category}
+                    url={resource.url}
+                    pricing={resource.pricing}
+                    image={resource.image}
+                  />
+                ))
+              : redirect("/")}
+          </Suspense>
+        </section>
+        <PaginationSection maxPage={maxPage} />
+      </section>
     </main>
   );
 }
