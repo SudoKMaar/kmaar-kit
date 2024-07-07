@@ -3,19 +3,21 @@ import { groq } from "next-sanity";
 import { ArrowRight } from "lucide-react";
 import { redirect } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { client, sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import ResourceCard from "@/components/resource-card";
 import { ResourceCardType } from "@/sanity/lib/types";
 import TextShimmer from "@/components/ui/animated-shiny-text";
 import PaginationSection from "@/components/resource-pagination-section";
 import ResourceCardSkeleton from "@/components/resource-card-skeleton";
 import NumberTicker from "@/components/ui/number-ticker";
+import { ResourceSortingSelect } from "@/components/resource-sorting-select";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams?: {
     page: string;
+    sort: "desc" | "asc" | "recent" | "oldest";
   };
 }) {
   const getTotalResourcesQuery = groq`count(*[_type == 'resource'])`;
@@ -28,7 +30,25 @@ export default async function Home({
   const maxPage: number = Math.ceil(totalResources / 12);
   // console.log("POSTnumber (rounded up): " + postsNum);
   const pageSize = 12;
-  const getAscendingResourcesQuery = groq`*[_type == "resource"] | order(name asc) [${
+  const sortParam = searchParams?.sort;
+  let sortOrder;
+  switch (sortParam) {
+    case "asc":
+      sortOrder = "name asc";
+      break;
+    case "desc":
+      sortOrder = "name desc";
+      break;
+    case "recent":
+      sortOrder = "_createdAt desc";
+      break;
+    case "oldest":
+      sortOrder = "_createdAt asc";
+      break;
+    default:
+      sortOrder = "name asc";
+  }
+  const getResourcesQuery = groq`*[_type == "resource"] | order(${sortOrder}) [${
     (pageNum - 1) * pageSize
   }...${pageNum * pageSize}] {
     _id,
@@ -44,10 +64,12 @@ export default async function Home({
       "image": asset->url,
       alt,
     }}`;
+  // console.log(getResourcesQuery);
   const resources: ResourceCardType[] = await sanityFetch({
-    query: getAscendingResourcesQuery,
+    query: getResourcesQuery,
     tags: ["resource"],
   });
+  // console.log(resources);
   return (
     <main className="items-center justify-between w-full mx-auto">
       <div className="h-fit w-full bg-background bg-grid-white/[0.08] relative flex items-center justify-center">
@@ -81,7 +103,7 @@ export default async function Home({
       </div>
 
       <section>
-        <div className="py-4 mx-4">
+        <div className="py-4 mx-4 gap-y-1 flex flex-col sm:flex-row justify-between">
           <h2 className="text-3xl text-white font-bold">
             Explore{" "}
             <span className="text-gradient">
@@ -89,6 +111,14 @@ export default async function Home({
               <NumberTicker value={totalResources} /> Resources{" "}
             </span>
           </h2>
+          <div className="w-[154px]">
+            <Suspense
+              key={searchParams?.sort || ""}
+              fallback={<p>Sort By A-Z</p>}
+            >
+              <ResourceSortingSelect sort={searchParams?.sort || "asc"} />
+            </Suspense>
+          </div>
         </div>
         <section className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 mx-4">
           <Suspense
