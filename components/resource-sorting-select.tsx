@@ -36,6 +36,7 @@ export const ResourceSortingSelect = ({
     <Select
       onValueChange={(e: "asc" | "desc" | "recent" | "oldest") => setSort(e)}
       defaultValue={defaultValue}
+      arial-label="Sort Resources"
     >
       <SelectTrigger className="w-[150px] text-white">
         <SelectValue placeholder="Sort by: " />

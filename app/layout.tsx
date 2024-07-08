@@ -21,6 +21,12 @@ const chivo = Chivo({
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
+  alternates: {
+    canonical: "/about",
+    languages: {
+      "en-US": "/en-US",
+    },
+  },
   title: {
     default: "KMaar Kit",
     template: "%s - KMaar Kit",

@@ -104,7 +104,7 @@ export default async function Home({
 
       <section>
         <div className="py-4 mx-4 gap-y-1 flex flex-col sm:flex-row justify-between">
-          <h2 className="text-3xl text-white font-bold">
+          <h2 className="text-2xl sm:text-3xl text-white font-bold">
             Explore{" "}
             <span className="text-gradient">
               {" "}
