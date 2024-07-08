@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Welcome to KMaar Kit, your premier destination for a diverse range of resources. I am frustrated developer committed to providing you with the highest quality materials to help you achieve your goals.",
 };
 
-export default function AboutPage() {
+export default function LegalPage() {
   return (
     <div className="my-20 flex-col flex lg:grid lg:grid-cols-12 sm:mx-4 lg:mx-0">
       <div className="text-muted-foreground col-span-4">
