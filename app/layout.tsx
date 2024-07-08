@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import { Sidebar } from "@/components/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import BlindContextProvider from "@/lib/blind-context-provider";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -50,19 +51,21 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth bg-background">
       <body className={rubik.variable + " " + chivo.variable}>
-        <Navbar />
-        <section className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-[1786px]">
-          <Sidebar />
-          <main
-            id="mainContent"
-            className="flex flex-col justify-between w-full max-w-screen-2xl py-8 pt-20 mx-auto overflow-auto"
-          >
-            {children}
-            <Footer />
-          </main>
-          <ScrollToTop />
-        </section>
-        <Toaster richColors />
+        <BlindContextProvider>
+          <Navbar />
+          <section className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-[1786px]">
+            <Sidebar />
+            <main
+              id="mainContent"
+              className="flex flex-col justify-between w-full max-w-screen-2xl py-8 pt-20 mx-auto overflow-auto"
+            >
+              {children}
+              <Footer />
+            </main>
+            <ScrollToTop />
+          </section>
+          <Toaster richColors />
+        </BlindContextProvider>
       </body>
     </html>
   );

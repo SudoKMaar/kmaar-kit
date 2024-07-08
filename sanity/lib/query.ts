@@ -5,6 +5,7 @@ export const categoriesQuery = groq`*[_type == "category"] {
     name,
     "slug": slug.current,
     description,
+    "categoryCount": count(*[_type == "resource" && references("category", ^._id)]),
     icon {
       "image": asset->url,
       alt,

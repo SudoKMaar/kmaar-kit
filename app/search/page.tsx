@@ -4,12 +4,14 @@ import { groq } from "next-sanity";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { sanityFetch } from "@/sanity/lib/client";
-import { ResourceCardType } from "@/sanity/lib/types";
+import AddResource from "@/components/add-resource";
+import { categoriesQuery } from "@/sanity/lib/query";
 import ResourceCard from "@/components/resource-card";
+import NumberTicker from "@/components/ui/number-ticker";
 import TextShimmer from "@/components/ui/animated-shiny-text";
+import { CategoriesType, ResourceCardType } from "@/sanity/lib/types";
 import ResourceCardSkeleton from "@/components/resource-card-skeleton";
 import PaginationSection from "@/components/resource-pagination-section";
-import NumberTicker from "@/components/ui/number-ticker";
 
 export const metadata: Metadata = {
   title: { absolute: "Search KMaar Kit: Boost Your Productivity" },
@@ -25,6 +27,10 @@ export default async function Search({
     q: string;
   };
 }) {
+  const categories: CategoriesType[] = await sanityFetch({
+    query: categoriesQuery,
+    tags: ["category"],
+  });
   const q = searchParams?.q ?? "";
   const searchQuery = groq`*[_type == "resource" && keywords match "*${q}*"] | order(name asc){
             _id,
@@ -110,7 +116,14 @@ export default async function Search({
                 />
               ))
             ) : (
-              <p className="text-white">No result found</p>
+              <div className="text-muted-foreground flex flex-col w-full mx-auto justify center col-span-full items-center py-4">
+                <p className="w-full text-xl text-center">
+                  Sorry! We don&apos;t have anything for that yet!
+                </p>
+                <div className="mx-auto items-center justify-center pt-2">
+                  <AddResource categories={categories} />
+                </div>
+              </div>
             )}
           </Suspense>
         </section>

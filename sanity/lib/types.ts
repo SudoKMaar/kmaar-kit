@@ -1,7 +1,9 @@
 export type CategoriesType = {
-  _id: string;
+  key?: string;
+  _id?: string;
   name: string;
   slug: string;
+  categoryCount?: number;
   description: string;
   icon: {
     image: string;
@@ -33,4 +35,8 @@ export type ResourceCardType = {
   url: string;
   pricing: "Free" | "Paid" | "Free Plan Available";
   image: { image: string; alt: string };
+};
+
+export type CategoryNameType = {
+  name: string;
 };

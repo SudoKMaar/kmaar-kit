@@ -38,6 +38,7 @@ export const Sidebar = async () => {
                 alt={cat.icon.alt}
               />
               {cat.name}
+              <sup>({cat.categoryCount})</sup>
             </Link>
           </Button>
         ))}

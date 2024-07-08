@@ -57,9 +57,25 @@ h5,
 h6 {
   font-family: var(--font-rubik), sans-serif;
 }
+
 .text-gradient {
   background: var(--gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.lens {
+  backdrop-filter: blur(0);
+  visibility: hidden;
+  opacity: 0;
+  /* transition: visibility 1s linear, opacity 1s linear; */
+  /* transition-delay: 500ms; */
+  transition: all ease-in-out 500ms;
+}
+
+.lens.visible {
+  visibility: visible;
+  opacity: 1;
+  backdrop-filter: blur(20px);
 }
