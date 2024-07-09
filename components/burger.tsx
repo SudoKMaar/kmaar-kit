@@ -34,7 +34,7 @@ export function BurgerMenu({ categories }: BurgerMenuProps) {
           <SidebarSearch categories={categories} />
         </div>
         <SheetTitle className="px-1 text-xl font-bold tracking-widest transition-colors text-foreground group-hover:text-foreground">
-          Categories
+          <Link href={`/categories`}>Categories</Link>
         </SheetTitle>
         {categories.map((cat) => (
           <Button
@@ -51,7 +51,7 @@ export function BurgerMenu({ categories }: BurgerMenuProps) {
                 className="inline mr-2 text-muted-foreground"
                 alt={cat.icon.alt}
               />
-              {cat.name}
+              {cat.name} <sup>({cat.categoryCount})</sup>
             </Link>
           </Button>
         ))}

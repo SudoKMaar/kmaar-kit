@@ -24,11 +24,11 @@ export default async function CategoryPage({
   };
 }) {
   const getCategoryName = groq`*[_type == "category" && slug.current=="${params.slug}"] {name}`;
-  const categoryName: CategoryNameType = await sanityFetch({
+  const categoryName: CategoryNameType[] = await sanityFetch({
     query: getCategoryName,
     tags: ["category"],
   });
-  //   console.log(categoryName.name);
+  // console.log(categoryName);
   const getTotalResourcesQuery = groq`count(*[_type == 'resource' && references(*[_type == "category" && slug.current == "${params.slug}"]._id)])`;
   const pageNum = Number(searchParams?.page ?? 1);
   // console.log("pagenumber: " + pageNum);
@@ -120,7 +120,7 @@ export default async function CategoryPage({
               {" "}
               <NumberTicker value={totalResources} /> Resources{" "}
             </span>
-            in {categoryName.name}
+            in {categoryName[0].name}
           </h2>
           <div className="w-[154px]">
             <Suspense

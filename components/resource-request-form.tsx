@@ -194,11 +194,15 @@ export function ResourceRequestForm({
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="max-h-[250px] overflow-scroll">
                       <SelectGroup>
                         <SelectLabel>Categories</SelectLabel>
                         {categories.map((category) => (
-                          <SelectItem key={category.slug} value={category.slug}>
+                          <SelectItem
+                            key={category.slug}
+                            value={category.slug}
+                            className="cursor-pointer"
+                          >
                             {category.name}
                           </SelectItem>
                         ))}
@@ -227,11 +231,15 @@ export function ResourceRequestForm({
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="max-h-[250px] overflow-scroll">
                       <SelectGroup>
                         <SelectLabel>Categories</SelectLabel>
                         {categories.map((category) => (
-                          <SelectItem key={category.slug} value={category.slug}>
+                          <SelectItem
+                            key={category.slug}
+                            value={category.slug}
+                            className="cursor-pointer"
+                          >
                             {category.name}
                           </SelectItem>
                         ))}
@@ -267,7 +275,11 @@ export function ResourceRequestForm({
                       <SelectLabel>Pricing</SelectLabel>
                       {["Free", "Paid", "Free Plan Available"].map(
                         (pricingOption) => (
-                          <SelectItem key={pricingOption} value={pricingOption}>
+                          <SelectItem
+                            key={pricingOption}
+                            value={pricingOption}
+                            className="cursor-pointer"
+                          >
                             {pricingOption}
                           </SelectItem>
                         )

@@ -20,7 +20,8 @@ export const Sidebar = async () => {
 
       <div className="flex flex-col w-full overflow-auto max-w-sm max-h-[calc(100dvh-99px)] group text-white">
         <p className="px-1 text-xl font-bold tracking-widest transition-colors text-foreground group-hover:text-foreground">
-          Categories
+        <Link href={`/categories`}>
+          Categories</Link>
         </p>
         {categories.map((cat) => (
           <Button
