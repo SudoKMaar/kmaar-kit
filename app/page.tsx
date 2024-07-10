@@ -27,9 +27,9 @@ export default async function Home({
     query: getTotalResourcesQuery,
     tags: ["resource"],
   });
-  const maxPage: number = Math.ceil(totalResources / 12);
+  const maxPage: number = Math.ceil(totalResources / 24);
   // console.log("POSTnumber (rounded up): " + postsNum);
-  const pageSize = 12;
+  const pageSize = 24;
   const sortParam = searchParams?.sort;
   let sortOrder;
   switch (sortParam) {

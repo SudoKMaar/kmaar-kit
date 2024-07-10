@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata, ResolvingMetadata } from "next";
 import { Suspense } from "react";
 import { groq } from "next-sanity";
 import { ArrowRight } from "lucide-react";
@@ -12,6 +13,25 @@ import PaginationSection from "@/components/resource-pagination-section";
 import ResourceCardSkeleton from "@/components/resource-card-skeleton";
 import NumberTicker from "@/components/ui/number-ticker";
 import { ResourceSortingSelect } from "@/components/resource-sorting-select";
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const getCategoryName = groq`*[_type == "category" && slug.current=="${params.slug}"] {name,description}`;
+  const categoryName: CategoryNameType[] = await sanityFetch({
+    query: getCategoryName,
+    tags: ["category"],
+  });
+  return {
+    title: `${categoryName[0].name} Category`,
+    description: `Discover a wide range of developer resources about ${categoryName[0].name} at KMaar Kit. ${categoryName[0].description}`,
+  };
+}
 
 export default async function CategoryPage({
   params,

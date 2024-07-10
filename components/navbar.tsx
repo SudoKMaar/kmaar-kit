@@ -9,7 +9,7 @@ import { categoriesQuery } from "@/sanity/lib/query";
 export default async function Navbar() {
   const categories: CategoriesType[] = await sanityFetch({
     query: categoriesQuery,
-    tags: ["category"],
+    tags: ["category", "resource"],
   });
 
   return (

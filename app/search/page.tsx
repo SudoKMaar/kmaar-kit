@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { Suspense } from "react";
 import { groq } from "next-sanity";
 import { ArrowRight } from "lucide-react";
@@ -13,11 +13,20 @@ import { CategoriesType, ResourceCardType } from "@/sanity/lib/types";
 import ResourceCardSkeleton from "@/components/resource-card-skeleton";
 import PaginationSection from "@/components/resource-pagination-section";
 
-export const metadata: Metadata = {
-  title: { absolute: "Search KMaar Kit: Boost Your Productivity" },
-  description:
-    "Unlock a world of creativity and productivity with our comprehensive collection of tools, assets, and guides tailored for developers and designers alike. Search for resource search for KMaar Kit",
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined };
 };
+
+export async function generateMetadata(
+  { searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  return {
+    title: `Search results for ${searchParams.q}`,
+    description:
+      "Unlock a world of creativity and productivity with our comprehensive collection of tools, assets, and guides tailored for developers and designers alike. Search for resource search for KMaar Kit",
+  };
+}
 
 export default async function Search({
   searchParams,
@@ -32,7 +41,11 @@ export default async function Search({
     tags: ["category"],
   });
   const q = searchParams?.q ?? "";
-  const searchQuery = groq`*[_type == "resource" && keywords match "*${q}*"] | order(name asc){
+  const pageNum = Number(searchParams?.page ?? 1);
+  const pageSize = 24;
+  const searchQuery = groq`*[_type == "resource" && keywords match "*${q}*"] | order(name asc)[${
+    (pageNum - 1) * pageSize
+  }...${pageNum * pageSize}] {
             _id,
             _createdAt,
             name,
@@ -56,8 +69,7 @@ export default async function Search({
     query: getTotalResult,
     tags: ["resource"],
   });
-  const pageNum = Number(searchParams?.page ?? 1);
-  const maxPage = Math.ceil(totalResult / 12);
+  const maxPage = Math.ceil(totalResult / 24);
   return (
     <main className="items-center justify-between w-full mx-auto">
       <div className="h-fit w-full bg-background bg-grid-white/[0.08] relative flex items-center justify-center">
@@ -127,7 +139,7 @@ export default async function Search({
             )}
           </Suspense>
         </section>
-        <PaginationSection maxPage={1} />
+        <PaginationSection maxPage={maxPage} />
       </section>
     </main>
   );

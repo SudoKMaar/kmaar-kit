@@ -39,4 +39,5 @@ export type ResourceCardType = {
 
 export type CategoryNameType = {
   name: string;
+  description?: string;
 };

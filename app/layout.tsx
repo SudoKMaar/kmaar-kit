@@ -53,7 +53,7 @@ export default function RootLayout({
       <body className={rubik.variable + " " + chivo.variable}>
         <BlindContextProvider>
           <Navbar />
-          <section className="flex justify-between max-h-screen gap-4 px-4 mx-auto max-w-[1786px]">
+          <section className="flex justify-between max-h-screen gap-4 pl-4 mx-auto max-w-[1786px]">
             <Sidebar />
             <main
               id="mainContent"

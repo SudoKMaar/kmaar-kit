@@ -11,9 +11,9 @@ import { ArrowRight } from "lucide-react";
 import { groq } from "next-sanity";
 
 export const metadata: Metadata = {
-  title: "Categories",
+  title: "Category List",
   description:
-    "Discover a wide range of developer resources categorized in KMaar Kit. From software project management to npm troubleshooting, find what you need to level up your skills.",
+    "Discover a wide range of developer resources category wise in KMaar Kit. From 3D animation to seo, find what you need to level up your skills.",
 };
 
 export default async function CategoriesPage() {
